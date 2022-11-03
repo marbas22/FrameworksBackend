@@ -52,7 +52,6 @@ public class ActoresDAOImpl implements IActoresDao {
 
     @Override
     public void eliminarActor(Integer idActor) {
-        actoresJPA.deleteById(idActor);
         Optional<Actor> optional = actoresJPA.findById(idActor);
         if (optional.isPresent()) {
             Actor actor = optional.get();
@@ -67,5 +66,18 @@ public class ActoresDAOImpl implements IActoresDao {
     @Override
     public void actualizarActor(Actor actor) {
         actoresJPA.save(actor);
+    }
+
+    @Override
+    public void introducirActor(Integer idPelicula, Integer idActor) {
+        Optional<Actor> optionalActor = actoresJPA.findById(idActor);
+        if(optionalActor.isPresent()){
+            Actor actor = optionalActor.get();
+            Optional<Pelicula> optionalPelicula = peliculasJPA.findById(idPelicula);
+            if(optionalPelicula.isPresent()){
+                actor.addPelicula(optionalPelicula.get());
+                actoresJPA.save(actor);
+            }
+        }
     }
 }

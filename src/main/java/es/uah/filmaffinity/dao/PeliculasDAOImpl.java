@@ -26,30 +26,45 @@ public class PeliculasDAOImpl implements  IPeliculasDAO{
     }
 
     @Override
+    public List<Pelicula> buscarPeliculaPorGenero(String genero) {
+        return peliculasJPA.findByGenero(genero);
+    }
+
+    @Override
+    public List<Pelicula> buscarPeliculaPorNombreActor(String actorName) {
+        return peliculasJPA.findByActoresPeliculas_nombreContainingIgnoreCase(actorName);
+    }
+
+    @Override
+    public Pelicula buscarPeliculaPorId(Integer idPelicula) {
+        Optional<Pelicula> optional = peliculasJPA.findById(idPelicula);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        return null;
+    }
+
+    @Override
     public void guardarPelicula(Pelicula pelicula) {
         peliculasJPA.save(pelicula);
     }
 
     @Override
     public void eliminarPelicula(Integer idPelicula) {
+        Optional<Pelicula> optional = peliculasJPA.findById(idPelicula);
+        if (optional.isPresent()) {
+            Pelicula pelicula = optional.get();
+            List<Actor> actores = pelicula.getActores();
+            for (Actor actor : actores) {
+                System.out.println(actor.getNombre());
+                actores.remove(pelicula);
+            }
+        }
         peliculasJPA.deleteById(idPelicula);
     }
 
     @Override
     public void actualizarPelicula(Pelicula pelicula) {
         peliculasJPA.save(pelicula);
-    }
-
-    @Override
-    public void introducirActor(Integer idPelicula, Integer idActor) {
-        Optional<Actor> optionalActor = actoresJPA.findById(idActor);
-        if(optionalActor.isPresent()){
-            Actor actor = optionalActor.get();
-            Optional<Pelicula> optionalPelicula = peliculasJPA.findById(idPelicula);
-            if(optionalPelicula.isPresent()){
-                actor.addPelicula(optionalPelicula.get());
-                actoresJPA.save(actor);
-            }
-        }
     }
 }

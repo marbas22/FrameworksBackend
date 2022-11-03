@@ -1,5 +1,7 @@
 package es.uah.filmaffinity.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,26 +12,17 @@ import java.util.Objects;
 @Table(name = "actores", schema = "filmaffinitydb")
 public class Actor {
     @Id
-    @Column(name = "id_actor", nullable = false)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id_actor;
-
-    @Column(name = "nombre", nullable = false, length = 45)
     private String nombre;
-
-    @Lob
-    @Column(name = "sexo")
     private String sexo;
-
-    @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
-
-    @Column(name = "pais_nacimiento", nullable = false, length = 45)
     private String paisNacimiento;
-
     @ManyToMany
     @JoinTable(name = "peliculas_has_actores",
             joinColumns = {@JoinColumn(name = "Actores_id_actor", referencedColumnName = "id_actor")},
             inverseJoinColumns = {@JoinColumn(name = "Peliculas_id_pelicula", referencedColumnName = "id_pelicula")})
+    @JsonIgnoreProperties("actores")
     private List<Pelicula> peliculas = new ArrayList<>();
 
     public Actor() {

@@ -1,5 +1,7 @@
 package es.uah.filmaffinity.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,37 +11,23 @@ import java.util.Objects;
 @Entity
 @Table(name = "peliculas", schema = "filmaffinitydb")
 public class Pelicula {
+
+    private static  final long serialVersionUID = 1;
     @Id
-    @Column(name = "id_pelicula", nullable = false)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "id_pelicula")
     private Integer id_pelicula;
-
-    @Column(name = "titulo", nullable = false, length = 45)
     private String titulo;
-
-    @Column(name = "anio")
     private LocalDate anio;
-
-    @Column(name = "duracion", columnDefinition = "TINYINT UNSIGNED")
     private Short duracion;
-
-    @Column(name = "pais", length = 120)
     private String pais;
-
-    @Lob
-    @Column(name = "direccion")
     private String direccion;
-
-    @Lob
-    @Column(name = "sinopsis")
     private String sinopsis;
-
-    @Column(name = "imagen")
     private byte[] imagen;
-
-    @Column(name = "genero")
     private String genero;
 
     @ManyToMany(mappedBy = "peliculas")
+    @JsonIgnoreProperties("peliculas")
     private List<Actor> actores = new ArrayList<>();
 
     public List<Actor> getActores() {
@@ -56,8 +44,8 @@ public class Pelicula {
     }
     public void removeActor(Actor actor) {
         if (actor != null) {
-        getActores().remove(actor);
-    }
+            getActores().remove(actor);
+        }
     }
 
     public Pelicula(){

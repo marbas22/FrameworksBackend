@@ -23,22 +23,31 @@ public class PeliculasServiceImpl implements IPeliculasService {
     }
 
     @Override
+    public List<Pelicula> buscarPeliculaPorGenero(String genero) {
+        return peliculasDAO.buscarPeliculaPorGenero(genero);
+    }
+
+    @Override
+    public List<Pelicula> buscarPeliculaPorNombreActor(String actorName) {
+        return peliculasDAO.buscarPeliculaPorNombreActor(actorName);
+    }
+
+    @Override
     public void guardarPelicula(Pelicula pelicula) {
         peliculasDAO.guardarPelicula(pelicula);
     }
 
     @Override
     public void eliminarPelicula(Integer idPelicula) {
-        peliculasDAO.eliminarPelicula(idPelicula);
+        if (peliculasDAO.buscarPeliculaPorId(idPelicula)!=null) {
+            peliculasDAO.eliminarPelicula(idPelicula);
+        }
     }
 
     @Override
     public void actualizarPelicula(Pelicula pelicula) {
-        peliculasDAO.actualizarPelicula(pelicula);
-    }
-
-    @Override
-    public void introducirActor(Integer idPelicula, Integer idActor) {
-        peliculasDAO.introducirActor(idPelicula,idActor);
+        if (peliculasDAO.buscarPeliculaPorId(pelicula.getId())!=null) {
+            peliculasDAO.actualizarPelicula(pelicula);
+        }
     }
 }

@@ -23,8 +23,29 @@ public class PeliculasController {
         return peliculasService.buscarPeliculasPorContainingTitulo(titulo);
     }
 
-//    @GetMapping("/peliculas/genero/{genero}")
-//    public List<Pelicula> buscarPeliculaPorGenero(@PathVariable("genero") String genero){
-//        return peliculasService
-//    }
+    @GetMapping("/peliculas/genero/{genero}")
+    public List<Pelicula> buscarPeliculaPorGenero(@PathVariable("genero") String genero){
+        return peliculasService.buscarPeliculaPorGenero(genero);
+    }
+
+    @GetMapping("/peliculas/actor/{actor}")
+    public List<Pelicula> buscarPeliculaPorActor(@PathVariable("actor") String nameActor) {
+        return peliculasService.buscarPeliculaPorNombreActor(nameActor);
+    }
+
+    @PostMapping("/peliculas")
+    public void guardarPelicula(@RequestBody Pelicula pelicula){
+        peliculasService.guardarPelicula(pelicula);
+    }
+
+    @PutMapping("/peliculas")
+    public void actualizarPelicula(@RequestBody Pelicula pelicula){
+        peliculasService.actualizarPelicula(pelicula);
+    }
+
+    @DeleteMapping("/peliculas/{id}")
+    public void eliminarPelicula(@PathVariable("id") Integer id){
+        peliculasService.eliminarPelicula(id);
+    }
+
 }

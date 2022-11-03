@@ -41,9 +41,7 @@ public class ActoresServiceImpl implements IActoresService{
 
     @Override
     public void guardarActor(Actor actor) {
-        if (actoresDao.buscarActorPorId(actor.getId())== null){
-            actoresDao.guardarActor(actor);
-        }
+        actoresDao.guardarActor(actor);
     }
 
     @Override
@@ -58,5 +56,10 @@ public class ActoresServiceImpl implements IActoresService{
         if (actoresDao.buscarActorPorId(actor.getId())!= null){
             actoresDao.actualizarActor(actor);
         }
+    }
+
+    @Override
+    public void introducirActor(Integer idPelicula, Integer idActor) {
+        actoresDao.introducirActor(idPelicula,idActor);
     }
 }
