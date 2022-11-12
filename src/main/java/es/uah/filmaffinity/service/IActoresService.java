@@ -8,7 +8,6 @@ public interface IActoresService {
     Actor buscarActorPorId(Integer idActor);
     List<Actor> buscarActorPorNombre(String nombre);
     List<Actor> buscarActorPorSexo(String sexo);
-    List<Actor> buscarActorPorPais(String pais);
     void guardarActor(Actor actor);
     void eliminarActor(Integer idActor);
     void actualizarActor(Actor actor);

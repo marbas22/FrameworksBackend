@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 public interface IPeliculasJPA extends JpaRepository<Pelicula, Integer>{
-
     List<Pelicula> findByTituloContainingIgnoreCase(String titulo);
     List<Pelicula> findByGenero(String genero);
     List<Pelicula> findByActoresPeliculas_nombreContainingIgnoreCase(@Param("n") String n);

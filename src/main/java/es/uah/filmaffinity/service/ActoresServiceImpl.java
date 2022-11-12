@@ -33,12 +33,6 @@ public class ActoresServiceImpl implements IActoresService{
     public List<Actor> buscarActorPorSexo(String sexo) {
         return actoresDao.buscarActorPorSexo(sexo);
     }
-
-    @Override
-    public List<Actor> buscarActorPorPais(String pais) {
-        return actoresDao.buscarActorPorPais(pais);
-    }
-
     @Override
     public void guardarActor(Actor actor) {
         actoresDao.guardarActor(actor);

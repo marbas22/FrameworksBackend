@@ -39,12 +39,6 @@ public class ActoresDAOImpl implements IActoresDao {
     {
         return actoresJPA.findBySexoContainingIgnoreCase(sexo);
     }
-
-    @Override
-    public List<Actor> buscarActorPorPais(String pais) {
-        return actoresJPA.findByPaisNacimiento(pais);
-    }
-
     @Override
     public void guardarActor(Actor actor) {
         actoresJPA.save(actor);

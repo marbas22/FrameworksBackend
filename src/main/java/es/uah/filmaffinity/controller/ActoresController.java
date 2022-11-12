@@ -19,6 +19,21 @@ public class ActoresController {
         return actoresService.buscarTodos();
     }
 
+    @GetMapping("/actores/{id}")
+    public Actor buscarActorPorId(@PathVariable("id") Integer id){
+        return actoresService.buscarActorPorId(id);
+    }
+
+    @GetMapping("/actores/nombre/{nombre}")
+    public List<Actor> buscarActoresPorNombre(@PathVariable("nombre") String nombre) {
+        return actoresService.buscarActorPorNombre(nombre);
+    }
+
+    @GetMapping("/actores/sexo/{sexo}")
+    public List<Actor> buscarActoresPorSexo(@PathVariable("sexo") String sexo) {
+        return actoresService.buscarActorPorSexo(sexo);
+    }
+
     @PostMapping("/actores")
     public void guardarActor(@RequestBody Actor actor){
         actoresService.guardarActor(actor);

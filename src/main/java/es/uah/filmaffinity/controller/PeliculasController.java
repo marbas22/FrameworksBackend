@@ -18,6 +18,11 @@ public class PeliculasController {
         return peliculasService.buscarTodos();
     }
 
+    @GetMapping("/peliculas/{id}")
+    public Pelicula buscarPeliculaPorId(@PathVariable("id") Integer id){
+        return peliculasService.buscarPorId(id);
+    }
+
     @GetMapping("/peliculas/titulo/{titulo}")
     public List<Pelicula> buscarPeliculaPorContainingTitulo(@PathVariable("titulo") String titulo) {
         return peliculasService.buscarPeliculasPorContainingTitulo(titulo);

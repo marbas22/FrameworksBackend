@@ -33,6 +33,11 @@ public class PeliculasServiceImpl implements IPeliculasService {
     }
 
     @Override
+    public Pelicula buscarPorId(Integer id) {
+        return peliculasDAO.buscarPeliculaPorId(id);
+    }
+
+    @Override
     public void guardarPelicula(Pelicula pelicula) {
         peliculasDAO.guardarPelicula(pelicula);
     }
